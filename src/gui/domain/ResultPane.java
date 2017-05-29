@@ -8,7 +8,10 @@ import models.ICallable;
 import javax.swing.*;
 import java.awt.*;
 
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class ResultPane extends JPanel implements ICallable{
 	
@@ -19,6 +22,7 @@ public class ResultPane extends JPanel implements ICallable{
 	private Rectangle rectangle = new Rectangle(X_OFFSET, Y_OFFSET, 0, 0);
 	private AtomicInteger numberOfComplaints = new AtomicInteger(0);
 	private NavigationLamp navigationLamp = new NavigationLamp();
+	private ExecutorService executor = Executors.newSingleThreadExecutor();
 	
 
 	ResultPane() {
@@ -51,14 +55,16 @@ public class ResultPane extends JPanel implements ICallable{
 		repaint();
 	}
 
-	void initProducerConsumerProblem(int producers, int consumers, int productsPerProducer, int productsPerConsumer, int productionInterval, int consumptionInterval) {
-		new Thread(() -> {
-			new ProducerConsumerRunner(producers, consumers, productsPerProducer, productsPerConsumer,
-					productionInterval, consumptionInterval, this);
-			GuiController.toggleStatus();
-			GuiController.enableInputs();
-		}).start();
-	}
+	void initProducerConsumerProblem(int producers, int consumers, int productsPerProducer, int productsPerConsumer,
+                                     int productionInterval, int consumptionInterval) {
+        GuiController.toggleStatus();
+	    //this code is executed in it's own dedicated thread to prevent the
+        // rest of the program to freeze while the code is being executed,
+        //and to ensure the code below never have to wait for resources.
+	    executor.submit(() -> new ProducerConsumerRunner(producers, consumers, productsPerProducer, productsPerConsumer,
+                productionInterval, consumptionInterval, this));
+	    executor.shutdown();
+    }
 
 	void resetComplaints() {
 		numberOfComplaints.set(0);

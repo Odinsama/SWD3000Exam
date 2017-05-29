@@ -12,10 +12,6 @@ public class GuiController {
 		applicationFrame.toggleStatus();
 	}
 
-	public static void enableInputs() {
-		applicationFrame.enableInputs();
-	}
-
 
 	public static void initProducerConsumerProblem(int producers, int consumers, int productsPerProducer,
 												   int productsPerConsumer, int productionInterval, int consumptionInterval) {

@@ -11,6 +11,7 @@ import javax.swing.border.TitledBorder;
 public class BorderedInput extends JPanel {
 	
 	private JFormattedTextField inputField;
+	private boolean editable = true;
 	/** 
 	 * @param format - The format for the input. The same as JFormattedTextField.
 	 * @param title - The name of the input field.
@@ -27,13 +28,10 @@ public class BorderedInput extends JPanel {
 		return (Integer) inputField.getValue();
 	}
 	
-	public void disableInput() {
-		inputField.setBackground(Color.LIGHT_GRAY);
-		inputField.setEditable(false);
-	}
-	
-	public void enableInput() {
-		inputField.setBackground(Color.WHITE);
-		inputField.setEditable(true);
+	public synchronized void toggleInput() {
+		editable = !editable;
+		inputField.setEditable(editable);
+		Color bgColor = editable ? Color.WHITE : Color.LIGHT_GRAY;
+		inputField.setBackground(bgColor);
 	}
 }

@@ -6,7 +6,7 @@ import java.util.Stack;
 import controller.RaceController;
 import models.Product;
 
-public class Consumer extends Thread {
+public class Consumer implements Runnable {
 	private Market market;
 	private Stack<Product> products = new Stack<>();
 	private int productsToGet;
@@ -16,7 +16,6 @@ public class Consumer extends Thread {
 		this.market = market;
 		this.productsToGet = productsToGet;
 		finishedTime = System.currentTimeMillis() + time;
-		start();
 	}
 
 	public void run() {

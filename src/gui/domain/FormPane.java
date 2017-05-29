@@ -1,8 +1,7 @@
 package gui.domain;
 
-import controller.RaceController;
-import gui.GuiController;
 import gui.BorderedInput;
+import gui.GuiController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +12,7 @@ public class FormPane extends JPanel implements ActionListener {
 	private final static int COL_WIDTH = 15;
 	private JButton startButton = new JButton("Start race");
 	private ArrayList<BorderedInput> borderedInputs = new ArrayList<>();
+	private boolean startEnabled = true;
 
 	FormPane() {
 		startButton.addActionListener(this);
@@ -21,18 +21,12 @@ public class FormPane extends JPanel implements ActionListener {
 		add(startButton);
 	}
 
-	private void disableInputs() {
+	void toggleInputs() {
 		for (BorderedInput borderedInput : borderedInputs) {
-			borderedInput.disableInput();
+			borderedInput.toggleInput();
 		}
-		startButton.setEnabled(false);
-	}
-
-	void enableInputs() {
-		for (BorderedInput borderedInput : borderedInputs) {
-			borderedInput.enableInput();
-		}
-		startButton.setEnabled(true);
+		startEnabled = !startEnabled;
+		startButton.setEnabled(startEnabled);
 	}
 
 	private void addInputsToList() {
@@ -52,8 +46,7 @@ public class FormPane extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		disableInputs();
-		GuiController.toggleStatus();
+
 		int producers = borderedInputs.get(0).getValue(),
 			consumers = borderedInputs.get(1).getValue(),
 			productsPerProducer = borderedInputs.get(2).getValue(),

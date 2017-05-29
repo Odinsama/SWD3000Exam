@@ -21,4 +21,8 @@ public class RaceController {
     public static void resetComplaints() {
         raceUI.resetComplaints();
     }
+
+    public static void raceFinished() {
+        raceUI.raceFinished();
+    }
 }

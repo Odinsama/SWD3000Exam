@@ -1,7 +1,6 @@
 package gui.domain;
 
 import java.awt.BorderLayout;
-import java.util.HashMap;
 
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -20,17 +19,15 @@ public class DomainView extends JPanel {
 
 	public void toggleStatus() {
 		resultPane.toggleStatus();
-	}
-
-	public void enableInputs() {
-		formPane.enableInputs();
+		formPane.toggleInputs();
 	}
 
     public void fileComplaint() {
 		resultPane.addComplaint();
     }
 
-    public void initProducerConsumerProblem(int producers, int consumers, int productsPerProducer, int productsPerConsumer, int productionInterval, int consumptionInterval) {
+    public void initProducerConsumerProblem(int producers, int consumers, int productsPerProducer,
+											int productsPerConsumer, int productionInterval, int consumptionInterval) {
 		resultPane.initProducerConsumerProblem(producers, consumers, productsPerProducer, productsPerConsumer,
 				productionInterval, consumptionInterval);
 

@@ -25,10 +25,6 @@ public class ApplicationFrame extends JFrame implements IRaceUI {
 		domainView.toggleStatus();
 	}
 
-    void enableInputs() {
-		domainView.enableInputs();
-	}
-
     public void fileComplaint() {
 		domainView.fileComplaint();
     }
@@ -38,7 +34,13 @@ public class ApplicationFrame extends JFrame implements IRaceUI {
 		domainView.resetComplaints();
 	}
 
-	void initProducerConsumerProblem(int producers, int consumers, int productsPerProducer, int productsPerConsumer, int productionInterval, int consumptionInterval) {
+	@Override
+	public void raceFinished() {
+		toggleStatus();
+	}
+
+	void initProducerConsumerProblem(int producers, int consumers, int productsPerProducer, int productsPerConsumer,
+									 int productionInterval, int consumptionInterval) {
 		domainView.initProducerConsumerProblem(producers, consumers, productsPerProducer, productsPerConsumer,
 				productionInterval, consumptionInterval);
 	}

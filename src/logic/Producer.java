@@ -6,7 +6,7 @@ import models.Product;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
-public class Producer extends Thread {
+public class Producer implements Runnable {
 	private Market market;
 	private Stack<Product> productsInStock = new Stack<>();
 	private int numOfProducts;
@@ -19,7 +19,6 @@ public class Producer extends Thread {
 		for (int i = 0; i < numOfProducts; i++) {
 			productsInStock.push(new Product("Product " + i + " by " + Thread.currentThread().getId()));
 		}
-		start();
 	}
 
 	public void run() {

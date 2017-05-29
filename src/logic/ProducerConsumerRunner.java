@@ -2,10 +2,14 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import controller.RaceController;
 import gui.domain.ResultPane;
 import models.*;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class ProducerConsumerRunner {
 
@@ -13,35 +17,26 @@ public class ProducerConsumerRunner {
 	public ProducerConsumerRunner(int producerCount, int consumerCount, int productsPerProducer,
 								  int productsPerConsumer, int productionInterval, int consumptionInterval,
 								  ICallable caller) {
+		ExecutorService executor = Executors.newCachedThreadPool();
 		RaceController.resetComplaints();
 		final ArrayList<ProductStackObserver> productStackObservers = new ArrayList<>();
 		productStackObservers.add(new ProductStackObserver(caller, producerCount * productsPerProducer));
 		Market market = new Market(productStackObservers);
-		Producer[] producers = new Producer[producerCount];
-		Consumer[] consumers = new Consumer[consumerCount];
 
 		for (int i = 0; i < producerCount; i++) {
-			producers[i] = new Producer(market, productsPerProducer, productionInterval);
+			executor.submit(new Producer(market, productsPerProducer, productionInterval));
 		}
 
 		for (int i = 0; i < consumerCount; i++) {
-			consumers[i] = new Consumer(market, productsPerConsumer, consumptionInterval);
+			executor.submit(new Consumer(market, productsPerConsumer, consumptionInterval));
 		}
-
-		for (int i = 0; i < producerCount; i++) {
-			try {
-				producers[i].join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
-		for (int i = 0; i < consumerCount; i++) {
-			try {
-				consumers[i].join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		executor.shutdown();
+		try {
+			executor.awaitTermination(10, SECONDS);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}finally {
+			RaceController.raceFinished();
 		}
 	}
 
