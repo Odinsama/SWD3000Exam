@@ -11,18 +11,16 @@ import java.awt.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
 public class ResultPane extends JPanel implements ICallable{
 	
 	private final int TOP_WIDTH = 150;
 	private final int TOP_HEIGHT = 150;
 	private final int X_OFFSET = 10;
 	private final int Y_OFFSET = 100;
-	private Rectangle rectangle = new Rectangle(X_OFFSET, Y_OFFSET, 0, 0);
-	private AtomicInteger numberOfComplaints = new AtomicInteger(0);
-	private NavigationLamp navigationLamp = new NavigationLamp();
-	private ExecutorService executor = Executors.newSingleThreadExecutor();
+	private final Rectangle rectangle = new Rectangle(X_OFFSET, Y_OFFSET, 0, 0);
+	private final AtomicInteger numberOfComplaints = new AtomicInteger(0);
+	private final NavigationLamp navigationLamp = new NavigationLamp();
+	private final ExecutorService executor = Executors.newSingleThreadExecutor();
 	
 
 	ResultPane() {

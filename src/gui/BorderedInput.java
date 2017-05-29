@@ -10,12 +10,12 @@ import javax.swing.border.TitledBorder;
 
 public class BorderedInput extends JPanel {
 	
-	private JFormattedTextField inputField;
+	private final JFormattedTextField inputField;
 	private boolean editable = true;
 	/** 
 	 * @param format - The format for the input. The same as JFormattedTextField.
 	 * @param title - The name of the input field.
-	 * @param cols - The number of colums on the input field. Width.
+	 * @param cols - The number of columns on the input field. Width.
 	 */
 	public BorderedInput(Object format, String title, int cols) {
 		inputField = new JFormattedTextField(format);

@@ -6,8 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 public class DomainView extends JPanel {
-	private FormPane formPane = new FormPane();
-	private ResultPane resultPane = new ResultPane();
+	private final FormPane formPane = new FormPane();
+	private final ResultPane resultPane = new ResultPane();
 
 	public DomainView() {
 		setLayout(new BorderLayout());

@@ -2,13 +2,11 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import models.*;
 
 class Market {
-	private ProductStackObservable productStackObservable = new ProductStackObservable();
+	private final ProductStackObservable productStackObservable = new ProductStackObservable();
 	Market(ArrayList<ProductStackObserver> productStackObservers) {
 		productStackObservable.populateWithProductStackObservers(productStackObservers);
 

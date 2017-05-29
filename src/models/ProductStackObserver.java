@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class ProductStackObserver {
 	private int stackSize = 0;
-	private ICallable caller;
+	private final ICallable caller;
 	private int maxValue = 1;
 
 	public ProductStackObserver(ICallable caller, int maxValue) {

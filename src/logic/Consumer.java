@@ -6,11 +6,11 @@ import java.util.Stack;
 import controller.RaceController;
 import models.Product;
 
-public class Consumer implements Runnable {
-	private Market market;
-	private Stack<Product> products = new Stack<>();
-	private int productsToGet;
-	private long finishedTime;
+class Consumer implements Runnable {
+	private final Market market;
+	private final Stack<Product> products = new Stack<>();
+	private final int productsToGet;
+	private final long finishedTime;
 
 	Consumer(Market market, int productsToGet, long time) {
 		this.market = market;

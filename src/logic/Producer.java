@@ -6,17 +6,17 @@ import models.Product;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
-public class Producer implements Runnable {
-	private Market market;
-	private Stack<Product> productsInStock = new Stack<>();
-	private int numOfProducts;
-	private long producerInterval;
+class Producer implements Runnable {
+	private final Market market;
+	private final Stack<Product> productsInStock = new Stack<>();
+	private final int numOfProducts;
+	private final long producerInterval;
 
-	Producer(Market market, int numOfProducs, long producerInterval) {
+	Producer(Market market, int numOfProducts, long producerInterval) {
 		this.market = market;
-		this.numOfProducts = numOfProducs;
+		this.numOfProducts = numOfProducts;
 		this.producerInterval = producerInterval;
-		for (int i = 0; i < numOfProducts; i++) {
+		for (int i = 0; i < this.numOfProducts; i++) {
 			productsInStock.push(new Product("Product " + i + " by " + Thread.currentThread().getId()));
 		}
 	}

@@ -8,10 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class FormPane extends JPanel implements ActionListener {
+class FormPane extends JPanel implements ActionListener {
 	private final static int COL_WIDTH = 15;
-	private JButton startButton = new JButton("Start race");
-	private ArrayList<BorderedInput> borderedInputs = new ArrayList<>();
+	private final JButton startButton = new JButton("Start race");
+	private final ArrayList<BorderedInput> borderedInputs = new ArrayList<>();
 	private boolean startEnabled = true;
 
 	FormPane() {

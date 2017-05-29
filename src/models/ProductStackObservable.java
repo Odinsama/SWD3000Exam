@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class ProductStackObservable {
-	private Stack<Product> productStack = new Stack<>();
-	private ArrayList<ProductStackObserver> productStackObservers = new ArrayList<>();
+	private final Stack<Product> productStack = new Stack<>();
+	private final ArrayList<ProductStackObserver> productStackObservers = new ArrayList<>();
 
 	public void push(Product product) {
 		productStack.push(product);

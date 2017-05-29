@@ -7,7 +7,7 @@ import controller.RaceController;
 import gui.domain.DomainView;
 
 public class ApplicationFrame extends JFrame implements IRaceUI {
-	private DomainView domainView = new DomainView();
+	private final DomainView domainView = new DomainView();
 
 	public ApplicationFrame() {
 		GuiController.init(this);
